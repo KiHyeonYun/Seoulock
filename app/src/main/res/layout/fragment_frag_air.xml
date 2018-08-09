@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:layout_margin="10dip"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="LOCATION"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/loc_spinner"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></Spinner>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_weight="1"
+        android:fadeScrollbars="true"
+        android:fillViewport="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ProgressBar
+                android:id="@+id/prog_main"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="250dip"
+                android:layout_height="250dip"
+                android:layout_centerInParent="true"
+                android:indeterminate="false"
+                android:max="250"
+                android:progressDrawable="@drawable/mycircle"
+                android:secondaryProgress="250" />
+
+            <TextView
+                android:id="@+id/txt_mindex"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_marginTop="20dip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="미세먼지" />
+
+            <TextView
+                android:id="@+id/txt_pm10"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" ㎍/㎡" />
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/prog_pm10"
+            android:layout_marginRight="20dip"
+            android:layout_marginLeft="20dip"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="150"
+            android:progressDrawable="@drawable/myproga" />
+
+        <LinearLayout
+            android:layout_marginTop="20dip"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="초미세먼지" />
+
+            <TextView
+                android:id="@+id/txt_pm25"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" ㎍/㎡" />
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/prog_pm25"
+            android:layout_marginRight="20dip"
+            android:layout_marginLeft="20dip"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:progressDrawable="@drawable/myprogb" />
+
+        <LinearLayout
+            android:layout_marginTop="20dip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="오존" />
+
+            <TextView
+                android:layout_weight="1"
+                android:gravity="center"
+                android:id="@+id/txt_ozon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" ppm" />
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/prog_oz"
+            android:layout_marginRight="20dip"
+            android:layout_marginLeft="20dip"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="150"
+            android:progressDrawable="@drawable/myprogc" />
+
+    </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

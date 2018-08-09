@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/eve_linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:src="@color/colorAccent"
+        android:id="@+id/eve_imageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"/>
+
+<LinearLayout
+    android:layout_margin="10dp"
+    android:id="@+id/linearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:layout_marginTop="5dp"
+        android:textSize="17dp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:text="11"
+        android:id="@+id/eve_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/eve_date"
+        android:layout_toRightOf="@id/eve_imageView" />
+
+    <TextView
+        android:layout_marginTop="5dp"
+        android:textSize="15dp"
+        android:text="22"
+        android:id="@+id/eve_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/eve_imageView"
+        android:layout_alignTop="@id/eve_location"
+        />
+
+    <TextView
+        android:layout_marginTop="5dp"
+        android:textSize="15dp"
+        android:text="33"
+        android:id="@+id/eve_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/eve_imageView"
+        />
+</LinearLayout>
+</LinearLayout>

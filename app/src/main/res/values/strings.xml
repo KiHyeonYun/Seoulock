@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">Seoulock</string>
+    <string name="loading">Loading…</string>
+
+
+    <string-array name="location">
+        <item>종로구</item>
+        <item>중구</item>
+        <item>용산구</item>
+        <item>성동구</item>
+        <item>광진구</item>
+        <item>동대문구</item>
+        <item>중랑구</item>
+        <item>성북구</item>
+        <item>강북구</item>
+        <item>도봉구</item>
+        <item>노원구</item>
+        <item>은평구</item>
+        <item>서대문구</item>
+        <item>마포구</item>
+        <item>양천구</item>
+        <item>강서구</item>
+        <item>구로구</item>
+        <item>금천구</item>
+        <item>영등포구</item>
+        <item>동작구</item>
+        <item>관악구</item>
+        <item>서초구</item>
+        <item>강남구</item>
+        <item>송파구</item>
+        <item>강동구</item>
+    </string-array>
+
+    <string-array name="loc_weather">
+        <item>종로</item>
+        <item>동대문</item>
+        <item>서초</item>
+        <item>서대문</item>
+        <item>용산</item>
+        <item>은평</item>
+        <item>관악</item>
+        <item>송파</item>
+        <item>중랑</item>
+        <item>중구</item>
+        <item>동작</item>
+        <item>남산</item>
+        <item>도봉</item>
+        <item>마포</item>
+        <item>구로</item>
+        <item>영등포</item>
+        <item>강남</item>
+        <item>양천</item>
+        <item>광진</item>
+        <item>강북</item>
+        <item>성북</item>
+        <item>성동</item>
+        <item>강동</item>
+    </string-array>
+</resources>

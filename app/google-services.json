@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "281540731854",
+    "firebase_url": "https://seoulock-abf0c.firebaseio.com",
+    "project_id": "seoulock-abf0c",
+    "storage_bucket": "seoulock-abf0c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:281540731854:android:33e3440388a7b456",
+        "android_client_info": {
+          "package_name": "com.example.yun.seoulock"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "281540731854-ptp67k1rqsacptg263t5upfh5cl7tdg3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.yun.seoulock",
+            "certificate_hash": "72c0a262bedc8bf6df032bbb573a1836d3805d64"
+          }
+        },
+        {
+          "client_id": "281540731854-ug6sobmfk2jcbt7aqtho900s0flf5i7q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYGxpy9MTS_Dy1YAoW_gkFXEpYshi92bI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "281540731854-ug6sobmfk2jcbt7aqtho900s0flf5i7q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

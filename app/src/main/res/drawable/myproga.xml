@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/backgroud">
+        <shape>
+            <corners android:radius="10dip"/>
+            <gradient
+                android:startColor="#ffffff"
+                android:centerColor="#cccccc"
+                android:endColor="#aaaaaa"
+                android:centerY="1.0"
+                android:angle="270"
+                />
+        </shape>
+    </item>
+    <item>
+        <clip>
+            <shape>
+                <corners android:radius="10dip"/>
+                <gradient
+                    android:startColor="#eefa0f"
+                    android:centerColor="#f3fb54"
+                    android:endColor="#f9fdb1"
+                    android:angle="270"
+                    />
+            </shape>
+        </clip>
+    </item>
+</layer-list>
