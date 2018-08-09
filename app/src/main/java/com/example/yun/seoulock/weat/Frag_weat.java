@@ -52,7 +52,7 @@ public class Frag_weat extends Fragment {
 
     ImageView i_weat, i_tmp, i_hum, i_sun, i_rain, i_wind;
     TextView t_mainTmp, t_mmTmp, t_sky, t_tmp, t_hum, t_sun, t_rain, t_wind;
-    String location;
+    String location = "종로";
     int sf;
     Bitmap bitmap;
 

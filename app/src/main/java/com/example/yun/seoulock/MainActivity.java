@@ -59,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
     final static String _WEAT = "WEAT_DATA";
     final static String _EVE = "EVE_DATA";
 
+    final static String daLocation = "종로구";
+    final static String dwLocation = "종로";
+
     ArrayList<AirData> m_airData = new ArrayList<AirData>();
     ArrayList<WeatData> m_weatData = new ArrayList<WeatData>();
     ArrayList<EveData> m_eveData = new ArrayList<EveData>();
@@ -70,8 +73,9 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     FirebaseUser mUser;
     private boolean doorlockstate = false;
-    double meter,agv;
+    double meter,avg;
 
+    int count = 0;
 //푸시 알림을 보내기위해 시스템에 권한을 요청하여 생성
 
     private BluetoothSPP bt;
@@ -83,6 +87,8 @@ public class MainActivity extends AppCompatActivity {
     Vector<Beacon> beacon;
     ScanSettings.Builder mScanSettings;
     List<ScanFilter> scanFilters;
+    //
+    ScanSettings scanSettings;
  //   SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss", Locale.KOREAN);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,11 +131,15 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext()
                         , "Connected to " + name + "\n" + address
                         , Toast.LENGTH_SHORT).show();
+                //
+                mBluetoothLeScanner.startScan(scanFilters, scanSettings, mScanCallback);
             }
 
             public void onDeviceDisconnected() { //연결해제
                 Toast.makeText(getApplicationContext()
                         , "Connection lost", Toast.LENGTH_SHORT).show();
+                //
+                mBluetoothLeScanner.stopScan(mScanCallback);
             }
 
             public void onDeviceConnectionFailed() { //연결실패
@@ -150,14 +160,15 @@ public class MainActivity extends AppCompatActivity {
         beacon = new Vector<>();
         mScanSettings = new ScanSettings.Builder();
         mScanSettings.setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY);
-        ScanSettings scanSettings = mScanSettings.build();
+//        ScanSettings scanSettings = mScanSettings.build();
+        scanSettings = mScanSettings.build();
 
         scanFilters = new Vector<>();
         ScanFilter.Builder scanFilter = new ScanFilter.Builder();
         scanFilter.setDeviceAddress("0C:B2:B7:7B:C5:44"); //ex) 00:00:00:00:00:00
         ScanFilter scan = scanFilter.build();
         scanFilters.add(scan);
-        mBluetoothLeScanner.startScan(scanFilters, scanSettings, mScanCallback);
+//        mBluetoothLeScanner.startScan(scanFilters, scanSettings, mScanCallback);
 
 
         lock_img.setOnClickListener(new View.OnClickListener() {
@@ -238,28 +249,41 @@ public class MainActivity extends AppCompatActivity {
                         + "\n" + result.getDevice().getBondState() + "\n" + result.getDevice().getType());
 
                 final ScanResult scanResult = result;
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                                for(int i=0;i<5;i++)
-                                {
-                                    meter+=calculateDistance(scanResult.getRssi());
+//                new Thread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                                for(int i=0;i<5;i++)
+//                                {
+//                                    meter+=calculateDistance(scanResult.getRssi());
+//
+//                                    try {
+//                                        Thread.sleep(100);
+//                                    } catch (InterruptedException e) {
+//                                        e.printStackTrace();
+//                                    }
+//                                }
+//                                avg=meter/5;
+//                                if(avg < 0.3){
+//                                   // bt.send(,true);
+//                                    bt.send(String.valueOf(avg).getBytes(),true);
+//                                }
+//                                meter=0;
+//                                avg=0;
+//                    }
+//                }).start();
 
-                                    try {
-                                        Thread.sleep(100);
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                                agv=meter/5;
-                                if(agv < 0.3){
-                                   // bt.send(,true);
-                                    bt.send(String.valueOf(agv).getBytes(),true);
-                                }
-                                meter=0;
-                                agv=0;
-                    }
-                }).start();
+                meter = calculateDistance(scanResult.getRssi());
+
+                count++;
+                Log.e("SCAN", "count_"+count);
+
+                bt.send(String.valueOf(meter).getBytes(),true);
+                Log.e("SCAN", "meter_"+meter);
+
+                if(count==100) {
+                    mBluetoothLeScanner.stopScan(mScanCallback);
+                    count=0;
+                }
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -297,7 +321,6 @@ public class MainActivity extends AppCompatActivity {
             if (!bt.isServiceAvailable()) {
                 bt.setupService();
                 bt.startService(BluetoothState.DEVICE_OTHER); //DEVICE_ANDROID는 안드로이드 기기 끼리
-
             }
         }
     }
@@ -311,7 +334,6 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == Activity.RESULT_OK) {
                 bt.setupService();
                 bt.startService(BluetoothState.DEVICE_OTHER);
-
             } else {
                 Toast.makeText(getApplicationContext()
                         , "Bluetooth was not enabled."

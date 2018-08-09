@@ -43,7 +43,7 @@ public class Frag_air extends Fragment {
     AirData myData;
 
     TextView t_main, t_pm10, t_pm25, t_oz, t_date;
-    String location;
+    String location = "종로구";
     int sf;
     int prog;
 

@@ -61,16 +61,22 @@ public class Frag_event extends Fragment {
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
+            Log.e("CCC","ZZZZ");
 
             if(m_eveData.isEmpty()) {
                 Log.e("SET","m_eveData is empty");
             } else {
                 if(adapter == null) {
+                    Log.e("CCC","XXXX");
                     adapter = new CustomList(getContext(), R.layout.fragment_frag_event, m_eveData);
                     listView.setAdapter(adapter);
                 } else {
+                    Log.e("CCC",m_eveData.get(0).getE_TITLE());
                     adapter.items = m_eveData;
+                    Log.e("CCC",adapter.items.get(0).getE_TITLE());
                     adapter.notifyDataSetChanged();
+                    Log.e("CCC","VVVV");
+                    listView.setAdapter(adapter);
                 }
             }
 
@@ -109,6 +115,8 @@ public class Frag_event extends Fragment {
         time_tv = ev.findViewById(R.id.eve_date);
         location_tv = ev.findViewById(R.id.eve_location);
         listView = ev.findViewById(R.id.eve_list);
+
+        bitmap_count = 0;
 
         progressDialog = new ProgressDialog(getActivity());
 
@@ -170,11 +178,11 @@ public class Frag_event extends Fragment {
                             }
                     });
 
-                    eveData.e_TITLE =   eveData.e_TITLE.replaceAll("&quot;","\"");
-                    title_tv.setText(eveData.e_TITLE);
+                    eveData.setE_TITLE(eveData.getE_TITLE().replaceAll("&quot;","\""));
+                    title_tv.setText(eveData.getE_TITLE());
                     title_tv.setSelected(true);
-                    time_tv.setText(eveData.e_SDATE+" ~ "+eveData.e_EDATE);
-                    location_tv.setText(eveData.e_PLACE);
+                    time_tv.setText(eveData.getE_SDATE()+" ~ "+eveData.getE_EDATE());
+                    location_tv.setText(eveData.getE_PLACE());
                     thumbnail.setImageBitmap(bitmap[position]);
                 }
             }
@@ -191,6 +199,7 @@ public class Frag_event extends Fragment {
                 Message msg;
 
                 try {
+
                     if (m_eveData.isEmpty()) {
                         m_eveData = eveParser.GetEveData();
                     }

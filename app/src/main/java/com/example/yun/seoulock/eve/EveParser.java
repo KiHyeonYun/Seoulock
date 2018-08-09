@@ -52,48 +52,48 @@ public class EveParser {
                         if (b_set && tag.compareTo("CODENAME") == 0) {
                             eveData = new EveData();
                             String str = parser.nextText();
-                            eveData.e_GENRE = str;
+                            eveData.setE_GENRE(str);
                             Log.e("EVE", str);
                         }
                         if (b_set && tag.compareTo("MAIN_IMG") == 0) {
                             String str = parser.nextText();
-                            eveData.e_IMG = str;
+                            eveData.setE_IMG(str);
                             Log.e("EVE", str);
 
                         }
                         if (b_set && tag.compareTo("TITLE") == 0) {
                             String str = parser.nextText();
-                            eveData.e_TITLE = str;
+                            eveData.setE_TITLE(str);
                             Log.e("EVE", str);
                         }
                         if (b_set && tag.compareTo("STRTDATE") == 0) {
                             String str = parser.nextText();
-                            eveData.e_SDATE = str;
+                            eveData.setE_SDATE(str);
                             Log.e("EVE", str);
                         }
                         if (b_set && tag.compareTo("END_DATE") == 0) {
                             String str = parser.nextText();
-                            eveData.e_EDATE = str;
+                            eveData.setE_EDATE(str);
                             Log.e("EVE", str);
                         }
                         if (b_set && tag.compareTo("TIME") == 0) {
                             String str = parser.nextText();
-                            eveData.e_TIME = str;
+                            eveData.setE_TIME(str);
                             Log.e("EVE", str);
                         }
                         if (b_set && tag.compareTo("PLACE") == 0) {
                             String str = parser.nextText();
-                            eveData.e_PLACE = str;
+                            eveData.setE_PLACE(str);
                             Log.e("EVE", str);
                         }
                         if (b_set && tag.compareTo("GCODE") == 0) {
                             String str = parser.nextText();
-                            eveData.e_LOCATION = str;
+                            eveData.setE_LOCATION(str);
                             Log.e("EVE", str);
                         }
                         if (b_set && tag.compareTo("ORG_LINK") == 0) {
                             String str = parser.nextText();
-                            eveData.e_LINK = str;
+                            eveData.setE_LINK(str);
                             Log.e("EVE", str);
                             m_eveData.add(eveData);
                         }
