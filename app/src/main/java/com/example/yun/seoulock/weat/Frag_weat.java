@@ -44,7 +44,7 @@ public class Frag_weat extends Fragment {
     final static String s_wind = " ㎧";
 
     WeatParser weatParser;
-    ArrayList<WeatData> m_weatData;
+    ArrayList<WeatData> m_weatData = new ArrayList<WeatData>();
     WeatData myData;
 
     OwmParser owmParser;
@@ -96,7 +96,7 @@ public class Frag_weat extends Fragment {
             m_weatData = bundle.getParcelableArrayList(_WEAT);
             Log.e("CCC", m_weatData.get(0).getW_TEMP());
         } else {
-            getWeatData();
+
         }
         
     }
@@ -143,8 +143,8 @@ public class Frag_weat extends Fragment {
                 location = loc_spin.getSelectedItem().toString();
                 Message msg;
 
-                if(m_weatData.isEmpty() || owmData == null) {
-
+                if(sf == 0) {
+                    sf = 1;
                 } else {
                     msg = handler.obtainMessage(0);
                     handler.sendMessage(msg);
@@ -162,6 +162,7 @@ public class Frag_weat extends Fragment {
         progressDialog.setMessage(getString(R.string.loading));
         progressDialog.show();
 
+        getWeatData();
         getOwmData();
 
         return wv;
@@ -173,14 +174,20 @@ public class Frag_weat extends Fragment {
             public void run() {
                 Message msg;
 
-                m_weatData = weatParser.GetWeatData();
+                try {
+                    if (m_weatData.isEmpty()) {
+                        m_weatData = weatParser.GetWeatData();
+                    }
 
-                Log.e("GET", m_weatData.get(0).getW_NAME());
+                    Log.e("GET", m_weatData.get(0).getW_NAME());
 
-                if( !m_weatData.isEmpty() ) {
+                    if (!m_weatData.isEmpty()) {
 
-                } else {
-                    Log.e("GET", "m_weatData is empty");
+                    } else {
+                        Log.e("GET", "m_weatData is empty");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
 
             }
@@ -194,22 +201,26 @@ public class Frag_weat extends Fragment {
 
                 Message msg;
 
-                owmData = owmParser.GetOwmData();
+                try {
+                    owmData = owmParser.GetOwmData();
 
-                Log.e("GET", owmData.cld_name);
+                    Log.e("GET", owmData.cld_name);
 
-                if( owmData != null) {
-                    msg = handler.obtainMessage(0);
-                    handler.sendMessage(msg);
+                    if (owmData != null) {
+                        msg = handler.obtainMessage(0);
+                        handler.sendMessage(msg);
 
-                    bitmap = getBitmap(owmData.whet_icon);
-                    msg = handler.obtainMessage(1);
-                    handler.sendMessage(msg);
+                        bitmap = getBitmap(owmData.whet_icon);
+                        msg = handler.obtainMessage(1);
+                        handler.sendMessage(msg);
 
+                    } else {
+                        Log.e("GET", "owmData is null");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
                     progressDialog.dismiss();
-
-                } else {
-                    Log.e("GET", "owmData is null");
                 }
 
             }

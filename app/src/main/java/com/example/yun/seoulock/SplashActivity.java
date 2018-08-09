@@ -31,9 +31,9 @@ public class SplashActivity extends AppCompatActivity {
     WeatParser weatParser;
     EveParser eveParser;
 
-    static ArrayList<AirData> m_airData;
-    static ArrayList<WeatData> m_weatData;
-    static ArrayList<EveData> m_eveData;
+    ArrayList<AirData> m_airData = new ArrayList<AirData>();
+    ArrayList<WeatData> m_weatData = new ArrayList<WeatData>();
+    ArrayList<EveData> m_eveData = new ArrayList<EveData>();
 
     boolean ab, wb, eb;
 
@@ -48,12 +48,11 @@ public class SplashActivity extends AppCompatActivity {
                 bundle.putParcelableArrayList(_WEAT, m_weatData);
                 bundle.putParcelableArrayList(_EVE, m_eveData);
                 intent.putExtras(bundle);
-                startActivity(intent);
             } else {
                 Log.e("CCC", "SPL_FAIL");
                 Toast.makeText(getApplicationContext(), "No Data", Toast.LENGTH_SHORT).show();
-                startActivity(intent);
             }
+            startActivity(intent);
             finish();
         }
 

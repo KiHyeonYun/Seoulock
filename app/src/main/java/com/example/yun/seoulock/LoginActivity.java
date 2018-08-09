@@ -41,9 +41,9 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseUser user;
     private FirebaseAuth.AuthStateListener authStateListener;
 
-    static ArrayList<AirData> m_airData;
-    static ArrayList<WeatData> m_weatData;
-    static ArrayList<EveData> m_eveData;
+    ArrayList<AirData> m_airData = new ArrayList<AirData>();
+    ArrayList<WeatData> m_weatData = new ArrayList<WeatData>();
+    ArrayList<EveData> m_eveData = new ArrayList<EveData>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,7 +136,6 @@ public class LoginActivity extends AppCompatActivity {
                                 bundle.putParcelableArrayList(_EVE, m_eveData);
                                 intent.putExtras(bundle);
                             }
-
                             startActivity(intent);
 
                             finish();
@@ -180,9 +179,7 @@ public class LoginActivity extends AppCompatActivity {
                                                 bundle.putParcelableArrayList(_EVE, m_eveData);
                                                 intent.putExtras(bundle);
                                             }
-
                                             startActivity(intent);
-
                                             finish();
 
                                         } else if (user.isEmailVerified() == false) {

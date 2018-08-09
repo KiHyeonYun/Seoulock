@@ -27,9 +27,9 @@ public class InfoActivity extends AppCompatActivity {
 
     Button b_back;
 
-    ArrayList<AirData> m_airData;
-    ArrayList<WeatData> m_weatData;
-    ArrayList<EveData> m_eveData;
+    ArrayList<AirData> m_airData = new ArrayList<AirData>();
+    ArrayList<WeatData> m_weatData = new ArrayList<WeatData>();
+    ArrayList<EveData> m_eveData = new ArrayList<EveData>();
 
     Fragment fragA, fragW, fragE;
 
@@ -52,9 +52,7 @@ public class InfoActivity extends AppCompatActivity {
             m_eveData = bundle.getParcelableArrayList(_EVE);
             Log.e("CCC", "INFO_" + m_eveData.get(0).getE_TITLE());
         } else {
-            m_airData = new ArrayList<AirData>();
-            m_weatData = new ArrayList<WeatData>();
-            m_eveData = new ArrayList<EveData>();
+
         }
 
         fragA = new Frag_air();

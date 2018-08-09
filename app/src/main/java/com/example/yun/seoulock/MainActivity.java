@@ -59,9 +59,10 @@ public class MainActivity extends AppCompatActivity {
     final static String _WEAT = "WEAT_DATA";
     final static String _EVE = "EVE_DATA";
 
-    ArrayList<AirData> m_airData;
-    ArrayList<WeatData> m_weatData;
-    ArrayList<EveData> m_eveData;
+    ArrayList<AirData> m_airData = new ArrayList<AirData>();
+    ArrayList<WeatData> m_weatData = new ArrayList<WeatData>();
+    ArrayList<EveData> m_eveData = new ArrayList<EveData>();
+
     private FloatingActionButton flobut;
     private ImageView lock_img;
     private Button logout;
@@ -186,7 +187,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             mAuth.signOut();
-//            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             Bundle bundle = new Bundle();
 

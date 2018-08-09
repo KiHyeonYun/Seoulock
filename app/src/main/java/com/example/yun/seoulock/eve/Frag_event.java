@@ -46,10 +46,11 @@ public class Frag_event extends Fragment {
     private ListView listView;
     private LinearLayout link_page;
     final static String key = "4d69666c52616c73343872666f5367";
+    final static String _EVE = "EVE_DATA";
     Bitmap [] bitmap = new Bitmap[20];
     int bitmap_count =0;
     EveParser eveParser;
-    ArrayList<EveData> m_eveData;
+    ArrayList<EveData> m_eveData = new ArrayList<EveData>();
     CustomList adapter = null;
 
 
@@ -64,7 +65,6 @@ public class Frag_event extends Fragment {
             if(m_eveData.isEmpty()) {
                 Log.e("SET","m_eveData is empty");
             } else {
-
                 if(adapter == null) {
                     adapter = new CustomList(getContext(), R.layout.fragment_frag_event, m_eveData);
                     listView.setAdapter(adapter);
@@ -72,14 +72,27 @@ public class Frag_event extends Fragment {
                     adapter.items = m_eveData;
                     adapter.notifyDataSetChanged();
                 }
-
-
             }
 
         }
 
     };
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        Log.e("CCC", "BUNDLE");
+        Bundle bundle = getArguments();
+        if(bundle != null) {
+            Log.e("CCC", "NOT NULL");
+            m_eveData = bundle.getParcelableArrayList(_EVE);
+            Log.e("CCC", m_eveData.get(0).getE_TITLE());
+        } else {
+
+        }
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -98,6 +111,7 @@ public class Frag_event extends Fragment {
         listView = ev.findViewById(R.id.eve_list);
 
         progressDialog = new ProgressDialog(getActivity());
+
         progressDialog.setCancelable(false);
         progressDialog.setMessage(getString(R.string.loading));
         progressDialog.show();
@@ -164,8 +178,7 @@ public class Frag_event extends Fragment {
                     thumbnail.setImageBitmap(bitmap[position]);
                 }
             }
-
-            progressDialog.dismiss();
+//            progressDialog.dismiss();
 
             return view;
         }
@@ -176,27 +189,35 @@ public class Frag_event extends Fragment {
             @Override
             public void run() {
                 Message msg;
-                m_eveData = eveParser.GetEveData();
 
-                Log.e("GET", m_eveData.get(0).e_TITLE);
-
-                if( !m_eveData.isEmpty() ) {
-                    while(bitmap_count !=20){
-                        try {
-                            bitmap[bitmap_count] = getthumbnailBitmap(m_eveData.get(bitmap_count).e_IMG);
-                        }catch (Exception e)
-                        {
-                            e.printStackTrace();
-                        }
-
-                        bitmap_count++;
+                try {
+                    if (m_eveData.isEmpty()) {
+                        m_eveData = eveParser.GetEveData();
                     }
 
-                    msg = handler.obtainMessage();
-                    handler.sendMessage(msg);
+                    Log.e("GET", m_eveData.get(0).getE_TITLE());
 
-                } else {
-                    Log.e("GET", "m_eveData is empty");
+                    if (!m_eveData.isEmpty()) {
+                        while (bitmap_count != 20) {
+                            try {
+                                bitmap[bitmap_count] = getthumbnailBitmap(m_eveData.get(bitmap_count).getE_IMG());
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                            bitmap_count++;
+                        }
+
+                        msg = handler.obtainMessage();
+                        handler.sendMessage(msg);
+
+                    } else {
+                        Log.e("GET", "m_eveData is empty");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    progressDialog.dismiss();
                 }
 
             }

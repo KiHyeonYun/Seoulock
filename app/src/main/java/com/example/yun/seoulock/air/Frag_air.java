@@ -39,7 +39,7 @@ public class Frag_air extends Fragment {
     final static String noData = "점검중";
 
     AirParser airParser;
-    ArrayList<AirData> m_airData;
+    ArrayList<AirData> m_airData = new ArrayList<AirData>();
     AirData myData;
 
     TextView t_main, t_pm10, t_pm25, t_oz, t_date;
@@ -77,7 +77,7 @@ public class Frag_air extends Fragment {
             m_airData = bundle.getParcelableArrayList(_AIR);
             Log.e("CCC", m_airData.get(0).getA_GRADE());
         } else {
-            m_airData = new ArrayList<AirData>();
+
         }
 
     }
@@ -117,8 +117,8 @@ public class Frag_air extends Fragment {
                 location = loc_spin.getSelectedItem().toString();
                 Message msg;
 
-                if(m_airData.isEmpty()) {
-
+                if(sf == 0) {
+                    sf = 1;
                 } else {
                     msg = handler.obtainMessage();
                     handler.sendMessage(msg);
@@ -130,9 +130,11 @@ public class Frag_air extends Fragment {
             }
         });
 
-        if(m_airData.isEmpty()) {
-            getAirData();
-        }
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage(getString(R.string.loading));
+        progressDialog.show();
+
+        getAirData();
 
         return av;
     }
@@ -141,24 +143,25 @@ public class Frag_air extends Fragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-//                progressDialog.setCancelable(false);
-//                progressDialog.setMessage(getString(R.string.loading));
-//                progressDialog.show();
-
                 Message msg;
 
-                m_airData = airParser.GetAirData();
+                try {
+                    if (m_airData.isEmpty()) {
+                        m_airData = airParser.GetAirData();
+                    }
 
-                Log.e("GET", m_airData.get(0).getA_MSRSTENAME());
+                    Log.e("GET", m_airData.get(0).getA_MSRSTENAME());
 
-                if( !m_airData.isEmpty() ) {
-                    msg = handler.obtainMessage();
-                    handler.sendMessage(msg);
-
-//                    progressDialog.dismiss();
-
-                } else {
-                    Log.e("GET", "m_airData is empty");
+                    if (!m_airData.isEmpty()) {
+                        msg = handler.obtainMessage();
+                        handler.sendMessage(msg);
+                    } else {
+                        Log.e("GET", "m_airData is empty");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    progressDialog.dismiss();
                 }
 
             }
